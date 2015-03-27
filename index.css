@@ -1,0 +1,81 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12/03/2015, 05:32:42 PM
+    Author     : mrodriguez
+*/
+@font-face {
+    font-family: 'aguafina_scriptregular';
+    src: url('fonts/aguafinascript-regular-webfont.eot');
+    src: url('fonts/aguafinascript-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/aguafinascript-regular-webfont.woff') format('woff'),
+         url('fonts/aguafinascript-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;}
+@font-face {
+    font-family: 'benchnineregular';
+    src: url('fonts/benchnine-regular-webfont.eot');
+    src: url('fonts/benchnine-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/benchnine-regular-webfont.woff') format('woff'),
+         url('fonts/benchnine-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;}    
+@font-face {
+    font-family: 'vast_shadowregular';
+    src: url('fonts/vastshadow-regular-webfont.eot');
+    src: url('fonts/vastshadow-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/vastshadow-regular-webfont.woff') format('woff'),
+         url('fonts/vastshadow-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;}
+@font-face {
+    font-family: 'kontrapunkt';
+    src: url('fonts/Kontrapunkt-LightItalic-webfont.eot');
+    src: url('fonts/Kontrapunkt-LightItalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/Kontrapunkt-LightItalic-webfont.woff') format('woff'),
+         url('fonts/Kontrapunkt-LightItalic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;}
+@font-face {
+    font-family: 'liberation_monoregular';
+    src: url('fonts/LiberationMono-Regular-webfont.eot');
+    src: url('fonts/LiberationMono-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/LiberationMono-Regular-webfont.woff') format('woff'),
+         url('fonts/LiberationMono-Regular-webfont.ttf') format('truetype'),
+         url('fonts/LiberationMono-Regular-webfont.svg#liberation_monoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;}
+@font-face {
+    font-family: 'maiden_orangeregular';
+    src: url('fonts/MaidenOrange-webfont.eot');
+    src: url('fonts/MaidenOrange-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/MaidenOrange-webfont.woff') format('woff'),
+         url('fonts/MaidenOrange-webfont.ttf') format('truetype'),
+         url('fonts/MaidenOrange-webfont.svg#maiden_orangeregular') format('svg');
+    font-weight: normal;
+    font-style: normal;}
+
+header, body {display: block; margin-left: auto; margin-right: auto; text-align: center; padding: 1%;}
+body {background-attachment: fixed; background-image: url('images/fondo.jpg'); background-repeat: no-repeat; background-size: 100% 100%;  }
+div {display:block; margin-left: auto; margin-right: auto; text-align: center; vertical-align: middle;}
+#pgHead {font-family: maiden_orangeregular; font-size: 24pt; font-weight: bold;
+         background-color: blue; border: 1pt black solid; border-radius: 10pt; color: #d5dfc8; text-shadow: 2pt 2pt 2pt black;
+         width: 90%; height: 90pt; box-shadow: 5pt; padding: 1%; vertical-align: middle;}
+#leftmenu {width: 15%; height: 25%; background-color: #a0adbd; border: 1pt black solid; padding: 2pt 5pt 2pt 5pt;
+          border-radius: 10pt; box-shadow: 5pt; display: inline-block; text-align: justify; vertical-align: top;}
+#leftcol {width: 50%; height: 10%; background-color: #a0adbd; border: 1pt black solid; padding: 2pt 5pt 2pt 5pt;
+          border-radius: 10pt; box-shadow: 5pt; display: inline-block; text-align: justify; overflow: scroll; padding: 1%; }
+#centercol1 {width: 50%; height: 10%; background-color: #a0adbd; border: 1pt black solid; padding: 2pt 5pt 2pt 5pt;
+            border-radius: 10pt; box-shadow: 5pt; display: inline-block; text-align: justify; overflow: scroll; padding: 1%; }
+#centercol2 {width: 50%; height: 10%; background-color: #a0adbd; border: 1pt black solid; padding: 2pt 5pt 2pt 5pt;
+            border-radius: 10pt; box-shadow: 5pt; display: inline-block; text-align: justify; overflow: scroll; padding: 1%;}
+#rightcol {width: 50%; height: 10%; background-color: #a0adbd; border: 1pt black solid; padding: 2pt 5pt 2pt 5pt;
+           border-radius: 10pt; box-shadow: 5pt; display: inline-block; text-align: justify; text-overflow: auto; }
+#title1, #title2, #title3 {background-color: #f60a1a; box-shadow: 5pt 5pt; border-radius: 10pt; display: inline-block; color: #d5c2c4;
+                           width: 100%; height: 22pt; text-align: center; vertical-align: middle; padding-top: 5pt; padding-bottom: 5pt;
+                           font-weight: bold; font-size: 12pt; text-shadow: 2pt 2pt 2pt black;}
+#title1:hover, #title2:hover, #title3:hover {background-color: white; color: red; cursor: crosshair; }
+.fotoxela {height: 400px; width: 400px;}
