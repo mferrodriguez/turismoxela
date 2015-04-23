@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="es">
+    <head>
+        <title>Sistema de Promoci&oacute;n Tur&iacute;stica - Men&uacute; Principal</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <!--[if lt IE 9]>
+                <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link href="../css/styles.css" rel="stylesheet">
+    </head>
+    <body class="container" style="padding: 30px;">
+        <div class="container col-lg-10" style="width: 100%;">
+            <header class="pagehead">
+                <span class="h2 resaltadon">Sistema de Promoci&oacute;n Tur&iacute;stica Quetzaltenango</span><br>
+                <span class="h2 resaltadon">Men&uacute; Principal</span><br>
+                <p class="text-right uid"><span class="resaltadon" id="nombreusuario">Usuario activo:&nbsp;&nbsp;</span></p>
+            </header>
+        </div>
+        <div class="container col-lg-10 jumbotron" style="width: 100%; padding: 15px 15px 15px 15px !important;">
+            <header class="h3 pagehead menuhead" style="width:75%; margin-left: auto; margin-right: auto; text-align: center;">
+                <span>Opciones Disponibles</span>
+            </header>
+            <article style="width:75%; margin-left: auto; margin-right: auto; text-align: center;">
+                <button class="btn-block btn-lg btn-primary" id="btnGenerales">Configuraciones Generales</button>
+                <div class="btn-group" style="width:100%;" id="smnuGenerales">
+                    <button class="btn-block btn-lg btn-info" id="optUsuarios">Gestionar Usuarios</button>
+                    <button class="btn-block btn-lg btn-info" id="optImagenes">Gestionar Im&aacute;genes</button>
+                    <button class="btn-block btn-lg btn-info" id="optArticulos">Gestionar Art&iacute;culos</button>
+                    <button class="btn-block btn-lg btn-info" id="optInst">Gestionar Enlaces</button>
+                </div>
+                <div style="height:15px;background-color: #101010;border: 2px #000; border-radius: 10px; "></div>
+                <button class="btn-block btn-lg btn-primary" id="btnQryBita">Consultar Bit&aacute;cora de Eventos</button>
+                <div style="height:15px;background-color: #101010;border: 2px #000; border-radius: 10px; "></div>
+                <button class="btn-block btn-lg btn-danger" id='btnQuit'><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;Salir del Sistema</button>
+            </article>
+        </div>        
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/custmenu.js"></script>
+    </body>
+</html>

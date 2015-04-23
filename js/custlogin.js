@@ -26,8 +26,8 @@ $(document).ready(function(){
                     if (data===0){
                         alert("Combinación Usuario/Contraseña no es válida!!\nVerifique!!!");
                     } else {
-                        alert(data.idu+"\n"+data.nom+"\n"+data.tip)
-                        document.location.replace('main.html');
+                        //alert(data.idu+"\n"+data.nom+"\n"+data.tip)
+                        document.location.replace('app/menu.html');
                         $("#uid").val('Usuario Activo:'+data.nom);
                     }
                 });
