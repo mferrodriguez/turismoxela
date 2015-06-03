@@ -1,0 +1,64 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2/04/2015, 04:17:29 PM
+    Author     : mrodriguez
+*/
+@font-face {
+    font-family: 'aguafina_scriptregular';
+    src: url('../fonts/aguafinascript-regular-webfont.eot');
+    src: url('../fonts/aguafinascript-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/aguafinascript-regular-webfont.woff') format('woff'),
+         url('../fonts/aguafinascript-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;}
+@font-face {
+    font-family: 'benchnineregular';
+    src: url('../fonts/benchnine-regular-webfont.eot');
+    src: url('../fonts/benchnine-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/benchnine-regular-webfont.woff') format('woff'),
+         url('../fonts/benchnine-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;}    
+@font-face {
+    font-family: 'vast_shadowregular';
+    src: url('../fonts/vastshadow-regular-webfont.eot');
+    src: url('../fonts/vastshadow-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/vastshadow-regular-webfont.woff') format('woff'),
+         url('../fonts/vastshadow-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;}
+@font-face {
+    font-family: 'kontrapunkt';
+    src: url('../fonts/Kontrapunkt-LightItalic-webfont.eot');
+    src: url('../fonts/Kontrapunkt-LightItalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Kontrapunkt-LightItalic-webfont.woff') format('woff'),
+         url('../fonts/Kontrapunkt-LightItalic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;}
+@font-face {
+    font-family: 'liberation_monoregular';
+    src: url('../fonts/LiberationMono-Regular-webfont.eot');
+    src: url('../fonts/LiberationMono-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/LiberationMono-Regular-webfont.woff') format('woff'),
+         url('../fonts/LiberationMono-Regular-webfont.ttf') format('truetype'),
+         url('../fonts/LiberationMono-Regular-webfont.svg#liberation_monoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;}
+@font-face {
+    font-family: 'maiden_orangeregular';
+    src: url('../fonts/MaidenOrange-webfont.eot');
+    src: url('../fonts/MaidenOrange-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/MaidenOrange-webfont.woff') format('woff'),
+         url('../fonts/MaidenOrange-webfont.ttf') format('truetype'),
+         url('../fonts/MaidenOrange-webfont.svg#maiden_orangeregular') format('svg');
+    font-weight: normal;
+    font-style: normal;}
+#primertitulo {font-weight: bold; text-shadow: 3px 3px 3px #23527c;}
+.uid {width:90%; background-color: transparent; border: 1px #31b0d5;}
+.pagehead {background-color: #31b0d5; border-radius: 15px; text-align: center; box-shadow: 2px 2px 2px #080808;}
+.menuhead {font-family: liberation_monoregular; font-size: 12; color: white; text-shadow: 1px 1px 1px #080808; padding: 4px;}
+.resaltadon {font-weight: bold; text-shadow: 1px 1px 1px white;}

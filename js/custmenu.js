@@ -42,5 +42,6 @@ $(document).ready(function(){
     });
     $("#smnuGenerales").toggle();
     $("#btnGenerales").click(function(){$("#smnuGenerales").toggle("slow");});
+    $("#optUsuarios").click(function(){document.location.replace('frmusuarios.php');});
     $("#btnQuit").click(function(){$.get("logout.php",function(data){document.location.replace('../index.html');});});    
 });
