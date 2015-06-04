@@ -6,7 +6,7 @@
     if ($connect==false){return "ERROR:No se pudo conectar a la Base de Datos<br>".mysqli_error($connect);}
     $luser = $_SESSION['idusuarios'];
     
-    $query = "INSERT INTO bitacora VALUES(NULL,NOW(),".$luser.",'O',NULL)";
+    $query = "INSERT INTO bitacora VALUES(NULL,NOW(),".$luser.",'O',NULL,NULL)";
     if (mysqli_query($connect, $query)){
         setcookie("turismoxela",null,  time()-7200);
         session_destroy();

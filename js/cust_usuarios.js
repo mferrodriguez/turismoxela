@@ -8,7 +8,7 @@
 function validsession(fullexit){
     $.getJSON("../app/session.php",function(data){
         if (data === 0){$.get("../app/logout.php",function(){document.location.replace('../index.html');});
-        } else {if (fullexit===0){ $("#nombreusuario").html("Usuario Activo:  "+data.nom);} else {document.location.replace("../menu.html");} }
+        } else {if (fullexit===0){ $("#nombreusuario").html("Usuario Activo:  "+data.nom);} else {document.location.replace("menu.html");} }
     });
 }
 
@@ -27,6 +27,7 @@ function refresh_form(){
     refresh_data();
     $("#frmData").hide(500);
     $("#tabData").show(500);
+    $("#btnChgPwd").hide();
 };
 
 $(document).ready(function(){
@@ -51,6 +52,7 @@ $(document).ready(function(){
             $("#frmData").show(500);
             $("#tabData").hide(500);
             $("#txtIdDepto").prop('disabled',true);
+            $("#btnChgPwd").show();
         }
     });
     $("#btnSave").click(function(){
@@ -79,8 +81,8 @@ $(document).ready(function(){
                     }
                 }
             } else {
-                alert("El Código del Departamento NO PUEDE ESTAR VACIO!!");
-                $("#txtIdDepto").focus();
+                alert("El Código del Usuario NO PUEDE ESTAR VACIO!!");
+                $("#txtUsuario_Cuenta").focus();
             }
         } else {
             if ($("#txtAction").val()==2){
@@ -88,7 +90,8 @@ $(document).ready(function(){
                     alert("El Nombre del Usuario NO PUEDE ESTAR VACIO!!");
                     $("#txtUsuario_Nombre").focus();
                 } else {
-                    $.get("../app/deptos_pro.php?a=2&c="+$("#txtIdDepto").val()+"&n="+$("#txtNomDepto").val(),function(data){
+                    $.get("../app/usuarios_pro.php?a=2&c="+$("#txtIdUsuarios").val()+"&n="+
+                            $("#txtUsuario_Nombre").val()+"&t="+$("#txtNivel").val(),function(data){
                         if (data==1){
                             refresh_form();
                             $("#tabData tfoot").html("<tr><td colspan='3' class='bg-success'>Registro modificado exitosamente ...</td></tr>");
@@ -103,46 +106,39 @@ $(document).ready(function(){
             window.setTimeout(function(){$("#tabData tfoot").html("");},4000);
         }
     });
-    $("#btnDelete").click(function(){
-        validsession(0);
-        if ($("#txtIdDepto").val()!==""){
-            $.get("../app/deptos_pro.php?a=3&c="+$("#txtIdDepto").val(),function(data){
-                if (data==0){
-                    var confirma = confirm("Realmente desea borrar este dato?");
-                    if (confirma === true){
-                        $.get("../app/deptos_pro.php?a=4&c="+$("#txtIdDepto").val(),function(data){
-                           if (data===1) {
-                                refresh_form();
-                                $("#tabData tfoot").html("<tr><td colspan='3' class='bg-success'>Registro ELIMINADO exitosamente ....</td></tr>");
-                                window.setTimeout(function(){$("#tabData tfoot").html("");},4000);
-                           } else {
-                                refresh_form();
-                                $("#tabData tfoot").html("<tr><td colspan='3' class='bg-warning'>NO se pudo eliminar el registro ....</td></tr>");
-                                window.setTimeout(function(){$("#tabData tfoot").html("");},4000);
-                           }
-                        });
-                    }
-                } else {
-                    alert("NO se puede Eliminar el Registro\nExisten "+data+" Municipios relacionados\nElimine primero los municipios para \npoder eliminar Departamentos");
-                    $("#txtAction").val("0");
+    $("#btnDelete").click(function(){validsession(0);});
+    $("#btnCancel").click(function(){validsession(0); refresh_form(); $("#tabData tfoot").html("");});
+    $("#txtNewPass").focusout(function(){
+        if ($("#txtNewPass").val()==""){
+            alert("ERROR: Clave no puede estar vacía!!");
+            $("#txtNewPass").focus();
+        }
+    });
+    $("#txtNewPassConf").focusout(function(){
+        if ($("#txtNewPassConf").val()==""){
+            alert("ERROR: Clave no puede estar vacía!!");
+            $("#txtNewPassConf").focus();
+        } else {
+            if ($("#txtNewPassConf").val()!==$("#txtNewPass").val()){
+                alert("ERROR: Ambos campos de clave DEBEN SER iguales!!!");
+                $("#txtNewPassConf").focus(); 
+            }
+        }
+    });
+    $("#btnPwd").click(function(){
+        if ($("#txtIdUsuarios")!=="") {
+        $.get("../app/usuarios_pro.php?a=5&c="+$("#txtIdUsuarios").val()+"&k="+CryptoJS.MD5($("#txtNewPass").val()),
+            function(data){
+                if (data==1){
                     refresh_form();
-                    $("#tabData tfoot").html("");
+                    $("#pwdModal").hide();
+                    $("#tabData tfoot").html("<tr><td colspan='3' class='bg-success'>Clave modificada exitosamente ...</td></tr>");
+                    window.setTimeout(function(){$("#tabData tfoot").html("");},4000);
+                } else {
+                    alert("No se pudo Modificar el Password!!\nIntente de nuevo.");
                 }
             });
         }
-    });
-    $("#btnCancel").click(function(){validsession(0); refresh_form(); $("#tabData tfoot").html("");});
-    $("#btnChgPwd").click(function(){
-//        var options = {
-//            "backdrop":"static",
-//            "keyboard":true,
-//            "aria-hidden":false,
-//            "show":true
-//        };
-       if ($("#txtIdUsuarios")!=="") {
-           alert(options);
-           $("#pwdModal").modal();
-       }
     });
     $("#btnExit").click(function(){validsession(1);});
 });
@@ -153,10 +149,6 @@ $(document).on('click','.opcion',function(){
     $("#txtUsuario_Nombre").val($(this).closest('tr').find('td:eq(3)').text());
     $("#txtNomAnt").val($("#txtUsuario_Nombre").val());
     var tipo = $(this).closest('tr').find('td:eq(4)').text().substring(0,1);
-    $("#txtNivel > [value="+tipo+"]").attr("selected","true");
-//    if ($(this).closest('tr').find('td:eq(4)').text()=="Administrador"){
-//        $("select[txtNivel='options']").find('option[value="Administrador"]').attr("selected",true);
-//    } else {
-//        $("select[txtNivel='options']").find('option[value="Usuario"]').attr("selected",true);
-//    }
+    $("#txtTipoAnt").val(tipo);
+    if (tipo=="U"){$("#txtNivel").val("U");}else{$("#txtNivel").val("A");}
 });

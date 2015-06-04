@@ -8,7 +8,7 @@
 
     session_start();
     
-    if (!isset($_SESSION['ultact'])||(\time()-$_SESSION['ultact'])>120){
+    if (!isset($_SESSION['ultact'])||(\time()-$_SESSION['ultact'])>1200){
         $output = 0;
     } else {
         $_SESSION['ultact']=time();

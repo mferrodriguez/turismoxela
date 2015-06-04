@@ -23,7 +23,7 @@ setcookie("turismoxela",null,  time()+7200);
             $_SESSION['nivel'] = $nivel;
             $_SESSION['ultact'] = time();
             $output = json_encode(array('idu' => $_SESSION['idusuarios'], 'nom' => $_SESSION['usuario_nombre'], 'tip' => $_SESSION['nivel']));
-            $query = "INSERT INTO bitacora VALUES(NULL,NOW(),".$idusuarios.",'L',NULL)";
+            $query = "INSERT INTO bitacora VALUES(NULL,NOW(),".$idusuarios.",'L',NULL,NULL)";
             if (!mysqli_query($connect,$query)){echo mysqli_errno($connect)." - ".  mysqli_error($connect);}
         }
     } else {
