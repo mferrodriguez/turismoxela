@@ -9,7 +9,7 @@
     switch ($params['a']) {
     case 0:
         // SELECCION GENERAL - PARA LLENAR EL GRID
-        $query = "SELECT * FROM usuarios ORDER BY usuario_cuenta";
+        $query = "SELECT * FROM fotografias ORDER BY idfotografias, descripcion";
         $result = mysqli_query($connect, $query);
         $cuantos = mysqli_num_rows($result);
         $output="";
@@ -28,7 +28,7 @@
                         "</tr>";
             }
         } else {
-            $output = "AUN NO EXISTEN REGISTROS INGRESADOS ... PRESIONE [NUEVO]";
+            $output = "<tr><td colspan='4'>AUN NO EXISTEN REGISTROS INGRESADOS ... PRESIONE [NUEVO]</td></tr>";
         }
         break;
     case 1:

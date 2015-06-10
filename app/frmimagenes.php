@@ -31,29 +31,30 @@ and open the template in the editor.
                 <button type="button" class="btn btn-default btn-primary" id="btnExit"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;Volver</button>
             </div><br>
             <form id="frmData">
-                <div style="font-size: 11pt; text-shadow: 1px 1px #e5e5e5; font-weight: bold; text-align: center; width:100%;background-color: #555; color:white;">
-                    Ingrese los datos que se solicitan a continuaci&oacute;n:
-                </div>
-                <input type="hidden" id="txtAction"/>
-                <input type="hidden" id="txtIdFotografias"/>
                 <div class="form-group">
-                    <label for="txtIdSitios">Sitio al que pertenece la Im&aacute;gen:&nbsp;&nbsp;</label>
-                    <select class="form-control" id="txtIdSitios">
-<!--                        <option value="U">Usuario Normal</option>
-                        <option value="A">Administrador del Sistema</option>-->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="txtUpload">Seleccione el Archivo a Subir:&nbsp;&nbsp;</label>
-                    <input type="file" class="form-control" id="txtPath" placeholder="Ruta de Acceso del Archivo."/>
-                </div>
-                <div class="form-group">
-                    <label for="txtPath">Nombre del Archivo en el Servidor:&nbsp;&nbsp;</label>
-                    <input type="text" class="form-control" id="txtPath" placeholder="Ruta de Acceso del Archivo."/>
-                </div>
-                <div class="form-group">
-                    <label for="txtDescripcion">Descripci&oacute;n del Archivo:&nbsp;&nbsp;</label>
-                    <input type="text" class="form-control" id="txtDescripcion" placeholder="Ingrese una breve Descripci&oacute;n de la Im&aacute;gen"/>
+                    <div style="font-size: 11pt; text-shadow: 1px 1px #e5e5e5; font-weight: bold; text-align: center; width:100%;background-color: #555; color:white;">
+                        Ingrese los datos que se solicitan a continuaci&oacute;n:
+                    </div>
+                    <input type="hidden" id="txtAction"/>
+                    <input type="hidden" id="txtIdFotografias"/>
+                    <div class="form-group">
+                        <label for="txtIdSitios">Sitio al que pertenece la Im&aacute;gen:&nbsp;&nbsp;</label>
+                        <select class="form-control" id="txtIdSitios">
+                        </select>
+                    </div>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label for="txtPath">Nombre del Archivo en el Servidor:&nbsp;&nbsp;</label>
+                            <input type="text" class="form-control" id="txtPath" placeholder="Ruta de Acceso del Archivo."/>
+                            <button type="button" class="btn btn-default btn-primary" id="btnFile" data-toggle="modal" data-target="#divFile">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;&nbsp;Subir Archivo al Servidor
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDescripcion">Descripci&oacute;n del Archivo:&nbsp;&nbsp;</label>
+                        <input type="text" class="form-control" id="txtDescripcion" placeholder="Ingrese una breve Descripci&oacute;n de la Im&aacute;gen"/>
+                    </div>
                 </div>
             </form>
             <div id="divData">
@@ -62,42 +63,44 @@ and open the template in the editor.
                         <tr class="success resaltadon">
                             <td style="width: 5%;" class="text-center"></td>
                             <td style="width: 10%;" class="text-center">ID</td>
-                            <td style="width: 15%;" class="text-center">Nombre Archivo</td>
+                            <td style="width: 10%;" class="text-center">ID Sitio</td>
+                            <td style="width: 20%;" class="text-center">Nombre Archivo</td>
                             <td style="width: 50%;" class="text-justify">Descripci&oacute;n</td>
                         </tr>
                     </thead>
                     <tbody>
-                        
                     </tbody>
                     <tfoot></tfoot>
                 </table>
             </div>
         </div>
-        <div class="modal fade" id="pwdModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal fade" id="divFile" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
-              <div class="modal-header">
+              <div class="modal-header label-primary">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Cambio de Clave</h4>
+                <h4 class="modal-title">Subir una Im&aacute;gen</h4>
               </div>
               <div class="modal-body">
                 <div class="form-group">
-                    <label for="txtNewPass">Password (Clave) del Usuario:&nbsp;&nbsp;</label>
-                    <input type="password" class="form-control" id="txtNewPass" placeholder="Ingrese el NUEVO Password para la cuenta."/>
-                    <label for="txtNewPassConf">Por favor Confirme la nueva Clave:&nbsp;&nbsp;</label>
-                    <input type="password" class="form-control" id="txtNewPassConf" placeholder="Ingrese otra vez el NUEVO Password."/>
+                    <form action="processupload.php" method="post" enctype="multipart/form-data" id="MyUploadForm">
+                        <input name="image_file" id="imageInput" type="file" /><br>
+                        <input type="submit"  id="submit-btn" value="Subir" class="btn btn-default" />
+                        <img src="../images/ajax-loader.gif" id="loading-img" style="display:none;" alt="Por Favor espere ..."/>
+                    </form>
+                    <div id="output"></div>
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnPwd">Confirmar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
               </div>
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->        
         <script src="../js/jquery.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
-        <script src="../js/cust_usuarios.js"></script>
+        <script src="../js/cust_imagenes.js"></script>
         <script src="../js/crypt/md5.js"></script>
+        <script type="text/javascript" src="../js/jquery.form.js"></script>
     </body>
 </html>

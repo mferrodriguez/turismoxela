@@ -4,8 +4,8 @@ setcookie("turismoxela",null,  time()+7200);
     $config= parse_ini_file("../config/turismo.ini");
     $connect= mysqli_connect("localhost", $config['username'], $config['password'], $config['dbname']);
     if ($connect==false){return "ERROR:No se pudo conectar a la Base de Datos<br>".mysqli_error($connect);}
-    $luser = \filter_var($_GET['lu']);
-    $lkey = \filter_var($_GET['lk']);
+    $luser = filter_var($_GET['lu']);
+    $lkey = filter_var($_GET['lk']);
     
     $query = "SELECT * FROM usuarios WHERE usuario_cuenta = '".$luser."' AND clave = '".$lkey."'";
     //echo $query;

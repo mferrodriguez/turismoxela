@@ -4,27 +4,26 @@
     $connect= mysqli_connect("localhost", $config['username'], $config['password'], $config['dbname']);
     if ($connect==false){return "ERROR:No se pudo conectar a la Base de Datos<br>".mysqli_error($connect);}
     
-    $params = \filter_input_array(\INPUT_GET);
+    $params = filter_input_array(INPUT_GET);
     
     switch ($params['a']) {
     case 0:
         // SELECCION GENERAL - PARA LLENAR EL GRID
-        $query = "SELECT * FROM usuarios ORDER BY usuario_cuenta";
+        $query = "SELECT * FROM sitios ORDER BY idsitios";
         $result = mysqli_query($connect, $query);
         $cuantos = mysqli_num_rows($result);
         $output="";
         if ($cuantos > 0){
             while ($row = mysqli_fetch_assoc($result)){
-                if ($row['nivel']=="A") {$txtnivel = "Administrador";}else{$txtnivel = "Usuario";}
                 $output = $output.
-                        "<tr id='r".$row['idusuarios']."'>".
+                        "<tr id='r".$row['idsitios']."'>".
                             "<td>".
-                                "<input type='radio' id='".$row['idusuarios']."' class='opcion text-center' name='seleccionar'>".
+                                "<input type='radio' id='".$row['idsitios']."' class='opcion text-center' name='seleccionar'>".
                             "</td>".
-                            "<td class='text-center'>".$row['idusuarios']."</td>".
-                            "<td class='text-center'>".$row['usuario_cuenta']."</td>".
-                            "<td class='text-center nombre'>".$row['usuario_nombre']."</td>".
-                            "<td class='text-center'>".$txtnivel."</td>".
+                            "<td class='text-center'>".$row['idsitios']."</td>".
+                            "<td class='text-center'>".$row['nombre']."</td>".
+                            "<td class='text-center nombre'>".$row['ubicacion']."</td>".
+                            "<td class='text-center'>".$row['coordenadas']."</td>".
                         "</tr>";
             }
         } else {
@@ -33,53 +32,69 @@
         break;
     case 1:
         // INSERCION DE TUPLA
-        $query = "INSERT INTO usuarios VALUES(NULL,'".$params['c']."','".$params['n']."','".$params['t']."','".$params['k']."')";
+        $query = "INSERT INTO sitios ".
+                      "VALUES(NULL,'".$params['n']."','".$params['u']."','".$params['d']."','".$params['h']."','".$params['c']."')";
         if (!mysqli_query($connect, $query)){
             $output = mysqli_errno($connect)." - ".  mysqli_error($connect);
         } else {
             $output = 1;
-            $query = "INSERT INTO bitacora VALUES(NULL,NOW(),".$_SESSION['idusuario'].",'A','Mantenimiento de Departamentos',".
-                     "'".$params['c']." - ".$params['n']." - ".$params['t']."',NULL)";
-            $result=\mysqli_query($connect, $query);
+            $query = "INSERT INTO bitacora VALUES(NULL,NOW(),".$_SESSION['idusuarios'].",'A',".
+                     "'".$params['n']." - ".$params['u']." - ".$params['c']."',NULL)";
+            $result=mysqli_query($connect, $query);
         }
         break;
     case 2:
         // MODIFICACION DE TUPLA
-        $query = "SELECT * FROM usuarios WHERE idusuarios='".$params['c']."'";
+        $query = "SELECT * FROM sitios WHERE idsitios =".$params['i'];
         $result = mysqli_query($connect, $query);
         $cuantos = mysqli_num_rows($result);
         if ($cuantos==1){
             $anterior= mysqli_fetch_assoc($result);
-            $query = "UPDATE usuarios SET usuario_nombre = '".$params['n']."', nivel = '".$params['t']."' ".
-                      "WHERE idusuarios = '".$params['c']."'";
+            $query = "UPDATE sitios SET nombre = '".$params['n']."', ubicacion = '".$params['u']."', ".
+                                       "descripcion = '".$params['d']."', historia = '".$params['h']."', ".
+                                       "coordenadas = '".$params['c']."' ".
+                      "WHERE idsitios = ".$params['i'];
             if (!mysqli_query($connect, $query)){
                 $output = mysqli_errno($connect)." - ". mysqli_error($connect);
             } else {
                 $output = 1;
                 $query = "INSERT INTO bitacora ".
                          "VALUES(NULL,NOW(),".$_SESSION['idusuario'].",'C',".
-                         "'".$params['c']." - ".$params['n']." - ".$params['t']."',".
-                         "'".$anterior['iddepartamentos']." - ".$anterior['nombre_depto']." - ".$anterior['nivel']."')";
+                         "'".$params['i']." - ".$params['n']." - ".$params['c']."',".
+                         "'".$anterior['idsitios']." - ".$anterior['nombre']." - ".$anterior['coordenadas']."')";
                 $result= mysqli_query($connect, $query);
             }
         } else {
             $output = 0;
         }
         break;
-    case 5:
-        // MODIFICACION DE CLAVE
-        $output = "";
-        $query = "UPDATE usuarios SET clave = '".$params['k']."' WHERE idusuarios = ".$params['c'];
+    case 3:
+        // SELECCION INDIVIDUAL - PARA EDICION
+        $query = "SELECT * FROM sitios WHERE idsitios = ".$params['i'];
         $result = mysqli_query($connect, $query);
-            if (!mysqli_query($connect, $query)){
-                $output = mysqli_errno($connect)." - ". mysqli_error($connect);
-            } else {
-                $output = 1;
-                $query = "INSERT INTO bitacora ".
-                         "VALUES(NULL,NOW(),".$_SESSION['idusuario'].",'C',NULL,".
-                         "'".$params['c']." - ".$params['n']." - Cambio de Clave')";
-                $result= mysqli_query($connect, $query);
+        $cuantos = mysqli_num_rows($result);
+        $output="";
+        if ($cuantos = 1){
+            while ($row = mysqli_fetch_assoc($result)){
+                $output = json_encode(array("id"=>$row['idsitios'], "nom"=>$row['nombre'],
+                          "loc"=>$row['ubicacion'], "des"=>$row['descripcion'], "his"=>$row['historia'],
+                          "coo"=>$row['coordenadas']));
             }
+        } else {
+            $output = "ERROR GENERAL DE DATOS";
+        }
+        break;
+    case 4:
+        // SELECCION PARA LLENADO DE OPTIONS.
+        $query = "SELECT idsitios, nombre FROM sitios ORDER BY nombre";
+        $result = mysqli_query($connect, $query);
+        $cuantos = mysqli_num_rows($result);
+        $output="";
+        if ($cuantos > 0){
+            while ($row = mysqli_fetch_assoc($result)){$output = $output."<option value='".$row['idsitios']."'>".$row['nombre']."</option>";}
+        } else {
+            $output = "ERROR GENERAL DE DATOS";
+        }
         break;
     default:
         break;

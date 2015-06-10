@@ -25,7 +25,7 @@ and open the template in the editor.
                 <span class="resaltadon">Opciones disponibles:</span>
                 <button type="button" class="btn btn-default btn-primary" id="btnNew"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp;&nbsp;Nuevo</button>
                 <button type="button" class="btn btn-default btn-primary" id="btnSave"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;&nbsp;Grabar</button>
-                <button type="button" class="btn btn-default btn-primary" id="btnEdit"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;&nbsp;Editar</button>
+                <button type="button" class="btn btn-default btn-primary" id="btnEdit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;&nbsp;Editar</button>
                 <!--<button type="button" class="btn btn-default btn-primary" id="btnChgPwd" data-toggle="modal" data-target="#pwdModal"/><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;Cambiar Clave</button>-->
                 <a href="#" class="btn btn-default btn-primary" id="btnChgPwd" data-toggle="modal" data-target="#pwdModal"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;Cambiar Clave</a>
                 <!--<button type="button" class="btn btn-default btn-primary" id="btnDelete"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;&nbsp;Eliminar</button>-->

@@ -13,7 +13,7 @@ var status = false;
 function validsession(){
     $.getJSON("session.php",function(data){
         if (data === 0){
-            $.get("logout.php",function(data){document.location.replace('index.html');});
+            $.get("logout.php",function(data){document.location.replace('/index.html');});
         } else {
             uid = data.uid;
             nom = data.nom;
@@ -27,7 +27,7 @@ function validsession(){
 $(document).ready(function(){
     $.getJSON("session.php",function(data){
         if (data === 0){
-            $.get("logout.php",function(data){document.location.replace('index.html');});
+            $.get("logout.php",function(data){document.location.replace('/index.html');});
         } else {
             uid = data.uid;
             nom = data.nom;
@@ -43,5 +43,7 @@ $(document).ready(function(){
     $("#smnuGenerales").toggle();
     $("#btnGenerales").click(function(){$("#smnuGenerales").toggle("slow");});
     $("#optUsuarios").click(function(){document.location.replace('frmusuarios.php');});
+    $("#optSitios").click(function(){document.location.replace('frmsitios.php');});
+    $("#optImagenes").click(function(){document.location.replace('frmimagenes.php')});
     $("#btnQuit").click(function(){$.get("logout.php",function(data){document.location.replace('../index.html');});});    
 });

@@ -12,7 +12,7 @@ function validsession(fullexit){
     });
 }
 
-function refresh_data(){$.get("../app/usuarios_pro.php?a=0",function(data){$("#tabData tbody").html(data);});}
+function refresh_data(){$.get("../app/imagenes_pro.php?a=0",function(data){$("#tabData tbody").html(data);});}
 
 function clear_form(){
     $("#txtIdUsuarios").val("");
@@ -30,12 +30,64 @@ function refresh_form(){
     $("#btnChgPwd").hide();
 };
 
+function fill_sitios(){
+    $.get("../app/sitios_pro.php?a=4",function(data){
+        $("#txtIdSitios").html(data);
+    });
+}
 $(document).ready(function(){
     validsession(0);
     $("#frmData").hide();
+    fill_sitios();
     //refresh_data();
     clear_form();
     refresh_form();
+    var options = { 
+            target:   '#output',   // target element(s) to be updated with server response 
+            beforeSubmit:  beforeSubmit,  // pre-submit callback 
+            resetForm: true        // reset the form after successful submit 
+        }; 
+    $('#MyUploadForm').submit(function() { 
+            $(this).ajaxSubmit(options);  //Ajax Submit form            
+            // return false to prevent standard browser submit and page navigation 
+            return false; 
+    });     
+    function afterSuccess(){
+        $('#submit-btn').show(); //hide submit button
+	$('#loading-img').hide(); //hide submit button
+    }
+    //function to check file size before uploading.
+    function beforeSubmit(){
+        //check whether browser fully supports all File API
+        if (window.File && window.FileReader && window.FileList && window.Blob){
+            //check empty input filed
+            if( !$('#imageInput').val()) {$("#output").html("En serio? ... Archivo vacío?"); return false;}
+            var fsize = $('#imageInput')[0].files[0].size; //get file size
+            var ftype = $('#imageInput')[0].files[0].type; // get file type
+            //allow only valid image file types 
+            switch(ftype) {
+                case 'image/png': case 'image/gif': case 'image/jpeg': case 'image/pjpeg': break;
+                default: $("#output").html("<b>"+ftype+"</b> Tipo de archivo NO PERMITIDO!");return false
+            }
+            //Allowed file size is less than 1 MB (1048576)
+            if(fsize>1048576) {$("#output").html("<b>"+bytesToSize(fsize) +"</b> Archivo demasiado grande!! <br />Reduzca el tamaño de la imágen usando un software apropiado!.");return false;}
+            $('#submit-btn').hide(); //hide submit button
+            $('#loading-img').show(); //hide submit button
+            $("#output").html("");  
+        } else {
+            //Output error to older browsers that do not support HTML5 File API
+            $("#output").html("Por favor actualice su navegador, ya que la versión que está utilizando es incompatible!!");
+            return false;
+        }
+    }
+
+    //function to format bites bit.ly/19yoIPO
+    function bytesToSize(bytes) {
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        if (bytes == 0) return '0 Bytes';
+        var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+        return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    }    
     $("#tabData tfoot").html("");
     $("#btnNew").click(function(){
         validsession(0);
